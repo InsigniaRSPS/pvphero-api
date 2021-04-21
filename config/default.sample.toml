@@ -1,0 +1,7 @@
+[server]
+port = 1234
+
+[redis]
+port = 1234
+url = "redis.com"
+password = "redis_password"
