@@ -2,6 +2,6 @@
 port = 1234
 
 [redis]
-port = 1234
+port = 12345
 url = "redis.com"
 password = "redis_password"
