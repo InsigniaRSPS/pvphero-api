@@ -1,0 +1,31 @@
+name: Rust Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  API_SERVER_PORT: ${{ secrets.API_SERVER_PORT }}
+  API_SERVER_REDIS_PORT: ${{ secrets.API_SERVER_REDIS_PORT }}
+  API_SERVER_REDIS_URL: ${{ secrets.API_SERVER_REDIS_URL }}
+  API_SERVER_REDIS_PASSWORD: ${{ secrets.API_SERVER_REDIS_PASSWORD }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build
+        run: cargo build --release
+
+      - name: Run tests
+        run: cargo test --verbose
+
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v2
+        with:
+          name: pvphero-api
+          path: ./target/release/pvphero-api
